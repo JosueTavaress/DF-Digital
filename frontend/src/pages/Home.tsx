@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <>
       <p>Home</p>
-      { users.map((el: IUsersApi) => <p>{el.name}</p>) }
+      { users.map((el: IUsersApi, idx: number) => <p key={idx}>{el.name}</p>) }
     </>
   )
 }
