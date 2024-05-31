@@ -1,8 +1,8 @@
 import { Response, Request } from 'express';
-import { getAllUsersModel } from '../services/user-service';
+import { getAll } from '../services/user-service';
 
 const getAllUsers = (_req: Request, res: Response) => {
-  return res.send(getAllUsersModel());
+  return res.send(getAll());
 };
 
 export {
