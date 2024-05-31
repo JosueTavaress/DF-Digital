@@ -1,6 +1,6 @@
 export interface IUsers {
   name: string,
-  e_mail: string
+  email: string
 }
 
 /**
@@ -11,7 +11,7 @@ export interface IUsers {
  *      type: object
  *      required:
  *        - name
- *        - e-mail
+ *        - email
  *      properties:
  *        name:
  *          type: string
@@ -22,7 +22,7 @@ export interface IUsers {
  */
 const user: IUsers[] = [{
   name: "josué",
-  e_mail: "josueferreira8.jf@gmai.com"
+  email: "josueferreira8.jf@gmai.com"
 }]
 
 export default user;
