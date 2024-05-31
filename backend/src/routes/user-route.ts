@@ -10,7 +10,7 @@ export const routerUser = Router();
  *     summary: Get all users
  *     responses:
  *       200:
- *         description: A list of Employees
+ *         description: A list of Users
  *         content:
  *           application/json:
  *             schema:

@@ -24,3 +24,20 @@ services:
     environment:
       NODE_ENV: development
     command: npm run dev
+    depends_on:
+      - db
+  db:
+    container_name: db-df-digital
+    image: mysql
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+        LANG: C.UTF-8
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: dfDigital
+        MYSQL_USER: user
+        MYSQL_PASSWORD: user
+    volumes:
+        - ./backend/sql:/docker-entrypoint-initdb.d

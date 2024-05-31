@@ -1,7 +1,8 @@
-import users from '../models/user-model/user-model';
+import userModel from '../models/user-model/user-model';
 import { IUsers } from '../models/user-model/user-model';
 
-const getAll = (): IUsers[] => {
+const getAll = async (): Promise<any> => {
+  const users = await userModel.getAllUsers();
   return users;
 }
 

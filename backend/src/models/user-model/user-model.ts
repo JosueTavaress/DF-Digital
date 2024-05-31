@@ -1,6 +1,8 @@
+import { connection } from '../../db/connection';
 export interface IUsers {
   name: string,
-  email: string
+  email: string,
+  password: string
 }
 
 /**
@@ -9,20 +11,20 @@ export interface IUsers {
  *  schemas:
  *    UserSchema:
  *      type: object
- *      required:
- *        - name
- *        - email
  *      properties:
  *        name:
  *          type: string
- *          default: Josué
  *        e-mail:
  *          type: string
- *          default: josueferreira8.jf@gmail.com
  */
-const user: IUsers[] = [{
-  name: "josué",
-  email: "josueferreira8.jf@gmai.com"
-}]
 
-export default user;
+const getAllUsers = async (): Promise<IUsers[]> => {
+  const sql = 'SELECT * FROM dfDigital.user';
+  const instance = await connection;
+  const [users] = await instance.execute(sql);
+  return users as IUsers[];
+}
+
+export default {
+  getAllUsers
+};
