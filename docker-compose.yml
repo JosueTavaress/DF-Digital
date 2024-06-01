@@ -25,19 +25,26 @@ services:
       NODE_ENV: development
     command: npm run dev
     depends_on:
-      - db
+      db: 
+        condition: service_healthy
   db:
     container_name: db-df-digital
     image: mysql
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
     restart: always
     ports:
       - "3306:3306"
     environment:
-        LANG: C.UTF-8
-        MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: dfDigital
-        MYSQL_USER: user
-        MYSQL_PASSWORD: user
+      LANG: C.UTF-8
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dfDigital
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
     volumes:
-        - ./backend/sql:/docker-entrypoint-initdb.d
+      - ./backend/sql:/docker-entrypoint-initdb.d
