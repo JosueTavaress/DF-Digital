@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { getAllUsers, createUser } from '../controllers/user-controller';
+import { validateAuthorization } from '../middlewares/authorization';
 import bodyValidator from '../middlewares/body-validator';
 export const routerUser = Router();
 /**
@@ -23,10 +24,18 @@ export const routerUser = Router();
  *                     type: string
  *                   email:
  *                     type: string
- *       400:
- *         description: Bad request
+ *       401:
+ *         description: Unauthorized. Bearer token required.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Bearer token is required
  */
-routerUser.get('/', [getAllUsers]);
+routerUser.get('/', [validateAuthorization, getAllUsers]);
 
 /**
  * @openapi

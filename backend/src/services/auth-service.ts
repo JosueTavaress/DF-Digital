@@ -33,7 +33,25 @@ const generateToken = (scope: string, data: { id: number }, expiresIn = '1d'): {
   };
 };
 
+
+const decodeJwt = (token: string) => {
+  const decode = jwt.decode(token, { complete: true });
+  return decode?.payload;
+};
+
+const validateToken = (scope: string, token: string): number => {
+  const jwtPass = process.env.JWT_SECRET;
+  jwt.verify(token, jwtPass!);
+  const decode = decodeJwt(token) as { scope: string; data: { id: number } };
+  if (decode.scope !== scope) {
+    throw Error;
+  };
+  const { data: { id } } = decode;
+  return id;
+};
+
 export {
   validateLogin,
-  generateToken
+  generateToken,
+  validateToken
 }
