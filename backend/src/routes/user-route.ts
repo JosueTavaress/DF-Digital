@@ -17,10 +17,87 @@ export const routerUser = Router();
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/UserSchema'
+ *                 type: object
+ *                 properties:
+ *                   name:
+ *                     type: string
+ *                   email:
+ *                     type: string
  *       400:
  *         description: Bad request
  */
 routerUser.get('/', [getAllUsers]);
 
+/**
+ * @openapi
+ * '/user':
+ *   post:
+ *     tags:
+ *     - User
+ *     summary: Create a new user
+ *     requestBody:
+ *       description: User data to create a new user
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: Name of the user
+ *               email:
+ *                 type: string
+ *                 description: Email of the user
+ *               password:
+ *                 type: string
+ *                 description: Password of the user
+ *             required:
+ *               - name
+ *               - email
+ *               - password
+ *     responses:
+ *       201:
+ *         description: User created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                   description: Unique identifier for the user
+ *                 name:
+ *                   type: string
+ *                   description: Name of the user
+ *                 email:
+ *                   type: string
+ *                   description: Email of the user
+ *       400:
+ *         description: Bad request
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   code:
+ *                     type: string
+ *                     example: invalid_type
+ *                   expected:
+ *                     type: string
+ *                     example: string
+ *                   received:
+ *                     type: string
+ *                     example: undefined
+ *                   path:
+ *                     type: array
+ *                     items:
+ *                       type: string
+ *                     example: ["name"]
+ *                   message:
+ *                     type: string
+ *                     example: Required
+ */
 routerUser.post('/', [bodyValidator, createUser]);
