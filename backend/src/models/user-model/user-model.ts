@@ -31,9 +31,8 @@ const getUserByEmail = async (email: string): Promise<IUsers | null> => {
 
 const createUser = async (user: Omit<IUsers, "id">): Promise<number> => {
   const { name, password, email } = user;
-  const passwordNotNull = password ? password : "123";
   const sql = 'INSERT INTO dfDigital.user (name, email, password) VALUES (?,?,?)';
-  const [{ insertId }]: any = await pool.execute(sql, [name, email, passwordNotNull]);
+  const [{ insertId }]: any = await pool.execute(sql, [name, email, password]);
   return insertId;
 };
 

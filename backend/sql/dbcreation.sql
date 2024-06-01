@@ -44,9 +44,9 @@ INSERT INTO `dfDigital`.`tag` (`name`, `description`) VALUES ('reunião', 'Etapa
 INSERT INTO `dfDigital`.`tag` (`name`, `description`) VALUES ('suporte', 'Etapa de auxílio ao cliente');
 INSERT INTO `dfDigital`.`tag` (`name`, `description`) VALUES ('finalizado', 'Prestação concluída');
 
-INSERT INTO `dfDigital`.`user` (`name`, `email`, `password`) VALUES ('João Ferreira', 'joaoferreira@gmail.com', 'senha123');
-INSERT INTO `dfDigital`.`user` (`name`, `email`, `password`) VALUES ('Nilce Silva', 'nilcesilva@gmail.com', 'senha123');
-INSERT INTO `dfDigital`.`user` (`name`, `email`, `password`) VALUES ('Pedro Nava', 'pedronava@gmail.com', 'senha123');
+INSERT INTO `dfDigital`.`user` (`name`, `email`, `password`) VALUES ('João Ferreira', 'joaoferreira@gmail.com', '$2b$10$sHAZ.YUlJe28hkWz1R1VU.9Qf3TFnIhRWHLxGYK8ChFC6P4uVzhua');
+INSERT INTO `dfDigital`.`user` (`name`, `email`, `password`) VALUES ('Nilce Silva', 'nilcesilva@gmail.com', '$2b$10$QAnB..zw8WonV2SoBPg91uZzdIo3NiYsu44aptGL/MdXtMrFuvtai');
+INSERT INTO `dfDigital`.`user` (`name`, `email`, `password`) VALUES ('Pedro Nava', 'pedronava@gmail.com', '$2b$10$WjHpciTraYVP/l1PVZ0oGu6eY6lZWbOXuPKLkq8LB.7H1zQqweyYS');
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
