@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { getAllUsers } from '../controllers/user-controller';
+import { getAllUsers, createUser } from '../controllers/user-controller';
+import bodyValidator from '../middlewares/body-validator';
 export const routerUser = Router();
 /**
  * @openapi
@@ -21,3 +22,5 @@ export const routerUser = Router();
  *         description: Bad request
  */
 routerUser.get('/', [getAllUsers]);
+
+routerUser.post('/', [bodyValidator, createUser]);
