@@ -7,7 +7,7 @@ const statusCode = {
 
 const bodyValidator = (req: Request, res: Response, next: NextFunction) => {
   const data = req.body;
-  const configSchema = schemas.find((config) => config.path === req.baseUrl);
+  const configSchema = schemas.find((config) => config.path === req.baseUrl && req.method === config.method);
   const validator = configSchema?.schema.safeParse(data); // dependency zod
   if (validator?.success) return next();
   const errorResponse = validator?.error.errors;
