@@ -4,3 +4,9 @@ export interface IUsers {
   email: string,
   password: string
 }
+
+export interface IUpdateUser {
+  name: string,
+  email: string,
+  user_links_tag: number[]
+}

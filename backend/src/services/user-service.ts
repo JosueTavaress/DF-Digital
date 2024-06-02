@@ -24,7 +24,12 @@ const create = async (user: Omit<IUsers, "id">): Promise<number> => {
   return newUserId;
 }
 
+const update = async (userId: number, data: any) => {
+  return userModel.updateUser(userId, data);
+}
+
 export {
   getAll,
-  create
+  create,
+  update
 }
