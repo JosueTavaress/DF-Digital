@@ -1,11 +1,11 @@
 import userModel from '../models/user-model/user-model';
-import { IUsers } from '../models/user-model/interface';
+import { IUsers, IUserWithTags } from '../models/user-model/interface';
 import { hashPassword } from './utils/hash';
 
-const getAll = async (): Promise<Omit<IUsers, "password">[]> => {
+const getAll = async (): Promise<Omit<IUserWithTags, "password">[]> => {
   const users = await userModel.getAllUsers();
   return users.map((el) => {
-    return { name: el.name, email: el.email, id: el.id }
+    return { name: el.name, email: el.email, id: el.id, tags: el.tags }
   });
 }
 

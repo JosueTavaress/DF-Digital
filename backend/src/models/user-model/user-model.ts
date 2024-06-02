@@ -1,11 +1,40 @@
 import { pool } from '../../db/connection';
-import { IUsers, IUpdateUser } from './interface';
+import { IUsers, IUpdateUser, IUserWithTags } from './interface';
 import { RowDataPacket } from 'mysql2'
 
-const getAllUsers = async (): Promise<IUsers[]> => {
-  const sql = 'SELECT * FROM dfDigital.user';
-  const [users] = await pool.execute<RowDataPacket[]>(sql) as [IUsers[], any];
-  return users;
+const getAllUsers = async (): Promise<IUserWithTags[]> => {
+  const sql = `
+    SELECT 
+      u.id as user_id, u.name as user_name, u.email as user_email, u.password as user_password,
+      t.id as tag_id, t.name as tag_name, t.description as tag_description, t.color as tag_color
+    FROM dfDigital.user u
+    LEFT JOIN dfDigital.user_tag ut ON u.id = ut.user_id
+    LEFT JOIN dfDigital.tag t ON ut.tag_id = t.id
+  `;
+  const [rows] = await pool.execute<RowDataPacket[]>(sql);
+  const userMap: { [key: number]: IUserWithTags } = {};
+  for (const row of rows) {
+    const userId = row.user_id;
+    if (!userMap[userId]) {
+      userMap[userId] = {
+        id: userId,
+        name: row.user_name,
+        email: row.user_email,
+        password: row.user_password,
+        tags: []
+      };
+    }
+
+    if (row.tag_id) {
+      userMap[userId].tags.push({
+        id: row.tag_id,
+        name: row.tag_name,
+        description: row.tag_description,
+        color: row.tag_color
+      });
+    }
+  }
+  return Object.values(userMap);
 }
 
 const getUserByEmail = async (email: string): Promise<IUsers | null> => {

@@ -10,3 +10,7 @@ export interface IUpdateUser {
   email: string,
   user_links_tag: number[]
 }
+
+export interface IUserWithTags extends IUsers {
+  tags: { id: number, name: string, description: string, color: string }[];
+}
