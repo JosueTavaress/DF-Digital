@@ -1,5 +1,5 @@
 import userModel from '../models/user-model/user-model';
-import { IUsers, IUserWithTags } from '../models/user-model/interface';
+import { IUsers, IUserWithTags, IUpdateUser } from '../models/user-model/interface';
 import { hashPassword } from './utils/hash';
 
 const getAll = async (): Promise<Omit<IUserWithTags, "password">[]> => {
@@ -24,12 +24,19 @@ const create = async (user: Omit<IUsers, "id">): Promise<number> => {
   return newUserId;
 }
 
-const update = async (userId: number, data: any) => {
+const update = async (userId: number, data: IUpdateUser) => {
+  const userLinksTag = [...new Set(data.user_links_tag)];
+  data.user_links_tag = userLinksTag;
   return userModel.updateUser(userId, data);
+}
+
+const deleteUser = async (id: number): Promise<void> => {
+  await userModel.deleteUser(id);
 }
 
 export {
   getAll,
   create,
-  update
+  update,
+  deleteUser
 }

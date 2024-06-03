@@ -52,6 +52,11 @@ const createUser = async (user: Omit<IUsers, "id">): Promise<number> => {
   return insertId;
 };
 
+const deleteUser = async (userId: number): Promise<void> => {
+  const sql = 'DELETE FROM dfDigital.user WHERE id = ?';
+  await pool.execute(sql, [userId]);
+};
+
 const updateUser = async (userId: number, data: IUpdateUser): Promise<IUpdateUser> => {
   const connection = await pool.getConnection();
   try {
@@ -94,5 +99,6 @@ export default {
   getAllUsers,
   getUserByEmail,
   createUser,
-  updateUser
+  updateUser,
+  deleteUser
 };

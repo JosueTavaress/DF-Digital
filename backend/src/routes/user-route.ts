@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllUsers, createUser, updateUser } from '../controllers/user-controller';
+import { getAllUsers, createUser, updateUser, deleteUser } from '../controllers/user-controller';
 import { validateAuthorization } from '../middlewares/authorization';
 import bodyValidator from '../middlewares/body-validator';
 export const routerUser = Router();
@@ -223,3 +223,5 @@ routerUser.post('/', [bodyValidator, createUser]);
  *                     example: Invalid input
  */
 routerUser.put('/:id', [validateAuthorization, bodyValidator, updateUser]);
+
+routerUser.delete('/:id', [validateAuthorization, deleteUser]);
