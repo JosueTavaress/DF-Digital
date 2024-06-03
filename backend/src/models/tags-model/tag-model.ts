@@ -8,6 +8,17 @@ const getAllTags = async (): Promise<ITags[]> => {
   return tags;
 }
 
+const createTag = async (tag: { name: string, description: string, color: string }): Promise<ITags> => {
+  const { name, description, color } = tag;
+  const sql = 'INSERT INTO dfDigital.tag (name, description, color) VALUES (?,?,?)';
+  const [{ insertId }]: any = await pool.execute(sql, [name, description, color]);
+
+  const sqlSelect = 'SELECT * FROM dfDigital.tag WHERE id = ?';
+  const [[row]]: any = await pool.execute(sqlSelect, [insertId]);
+  return row;
+};
+
 export {
-  getAllTags
+  getAllTags,
+  createTag
 }
