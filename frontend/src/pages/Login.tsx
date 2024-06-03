@@ -11,16 +11,42 @@ import {
   Text,
   Center
 } from "@chakra-ui/react";
+import { saveToken } from '../utils/storage-browser';
+import { useNavigate } from "react-router-dom";
+import api from '../api/http-request';
 
 const LoginRegister: React.FC = () => {
   const [isRegister, setIsRegister] = useState(false);
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const navigator = useNavigate();
 
-  const handler = () => {
-     if (isRegister) {
-      console.log("registrar")
-     } else {
-      console.log("entrar");
-     }
+  const handler = async () => {
+    if (isRegister) {
+      if (confirmPassword === password && name && email) {
+        const user = await api.createUser({
+          name,
+          password,
+          email,
+        });
+        if (user.id) {
+          const access = await api.login(email, password);
+          if (access.tempToken) {
+            saveToken(access.tempToken);
+            navigator("/");
+          }
+        }
+      }
+    }
+    if (!isRegister) {
+      const access = await api.login(email, password);
+      if (access.tempToken) {
+        saveToken(access.tempToken);
+        navigator("/");
+      }
+    }
   }
 
   return (
@@ -37,21 +63,27 @@ const LoginRegister: React.FC = () => {
           <Heading as="h2" size="xl" textAlign="center">
             {isRegister ? 'Novo Usuário' : 'Login'}
           </Heading>
+          {isRegister && (
+            <FormControl>
+              <FormLabel>Digite seu nome</FormLabel>
+              <Input onChange={(e) => setName(e.target.value)} type="text" placeholder="Digite seu nome" />
+            </FormControl>
+          )}
           <FormControl>
             <FormLabel>Email</FormLabel>
-            <Input type="email" placeholder="Digite seu email" />
+            <Input onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Digite seu email" />
           </FormControl>
           <FormControl>
             <FormLabel>Senha</FormLabel>
-            <Input type="password" placeholder="Digite sua senha" />
+            <Input onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Digite sua senha" />
           </FormControl>
           {isRegister && (
             <FormControl>
               <FormLabel>Confirme sua Senha</FormLabel>
-              <Input type="password" placeholder="Confirme sua senha" />
+              <Input onChange={(e) => setConfirmPassword(e.target.value)} type="password" placeholder="Confirme sua senha" />
             </FormControl>
           )}
-          <Button colorScheme="teal" size="lg" mt={4} onClick={ handler }>
+          <Button colorScheme="teal" size="lg" mt={4} onClick={handler}>
             {isRegister ? 'Cadastrar' : 'Entrar'}
           </Button>
           <Box display="flex" alignItems="center" justifyContent="center" mt={4}>
