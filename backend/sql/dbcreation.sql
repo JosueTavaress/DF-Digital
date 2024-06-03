@@ -58,10 +58,10 @@ CREATE TABLE IF NOT EXISTS `dfDigital`.`user_tag` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
-INSERT INTO `dfDigital`.`tag` (`name`, `description`, `color`) VALUES ('primeiro-contato', 'Etapa onde é feito o primeiro atendimento do cliente', '#FF5733');
-INSERT INTO `dfDigital`.`tag` (`name`, `description`, `color`) VALUES ('reunião', 'Etapa de interesse do cliente, reunião para alinhamento', '#33FF57');
-INSERT INTO `dfDigital`.`tag` (`name`, `description`, `color`) VALUES ('suporte', 'Etapa de auxílio ao cliente', '#3357FF');
-INSERT INTO `dfDigital`.`tag` (`name`, `description`, `color`) VALUES ('finalizado', 'Prestação concluída', '#FF33A1');
+INSERT INTO `dfDigital`.`tag` (`name`, `description`, `color`) VALUES ('primeiro-contato', 'Etapa onde é feito o primeiro atendimento do cliente', 'green');
+INSERT INTO `dfDigital`.`tag` (`name`, `description`, `color`) VALUES ('reunião', 'Etapa de interesse do cliente, reunião para alinhamento', 'blue');
+INSERT INTO `dfDigital`.`tag` (`name`, `description`, `color`) VALUES ('suporte', 'Etapa de auxílio ao cliente', 'yellow');
+INSERT INTO `dfDigital`.`tag` (`name`, `description`, `color`) VALUES ('finalizado', 'Prestação concluída', 'red');
 
 INSERT INTO `dfDigital`.`user` (`name`, `email`, `password`) VALUES ('João Ferreira', 'joaoferreira@gmail.com', '$2b$10$sHAZ.YUlJe28hkWz1R1VU.9Qf3TFnIhRWHLxGYK8ChFC6P4uVzhua');
 INSERT INTO `dfDigital`.`user` (`name`, `email`, `password`) VALUES ('Nilce Silva', 'nilcesilva@gmail.com', '$2b$10$QAnB..zw8WonV2SoBPg91uZzdIo3NiYsu44aptGL/MdXtMrFuvtai');
