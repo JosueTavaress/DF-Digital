@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IResponseLogin, IResponseCreateUser, IResponseUser } from './http-request-interface';
+import { IResponseLogin, IResponseCreateUser, IResponseUser, IResponseTag, IResponseUpdateUser } from './http-request-interface';
 import { getToken } from '../utils/storage-browser';
 
 const request = axios.create({
@@ -38,12 +38,49 @@ const getUsers = async (): Promise<IResponseUser[]> => {
     method: "GET",
     url: "/user",
     headers: { Authorization: `Bearer ${token}` }
-  })
+  });
+  return response.data;
+}
+
+const updateUser = async (id: number, data: { name?: string, email?: string, tags?: number[] }): Promise<IResponseUpdateUser> => {
+  const token = getToken();
+  const response = await request({
+    method: "PUT",
+    url: `/user/${id}`,
+    headers: { Authorization: `Bearer ${token}` },
+    data: {
+      name: data.name,
+      email: data.email,
+      user_links_tag: data.tags
+    }
+  });
+  return response.data;
+}
+
+const deleteUser = async (id: number): Promise<void> => {
+  const token = getToken();
+  await request({
+    method: "DELETE",
+    url: `/user/${id}`,
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
+const getTags = async (): Promise<IResponseTag[]> => {
+  const token = getToken();
+  const response = await request({
+    headers: { Authorization: `Bearer ${token}` },
+    method: "GET",
+    url: "/tag"
+  });
   return response.data;
 }
 
 export default {
   getUsers,
   login,
-  createUser
+  createUser,
+  getTags,
+  updateUser,
+  deleteUser
 }

@@ -21,3 +21,17 @@ export interface IResponseUser {
     color: string
   }[]
 }
+
+export interface IResponseUpdateUser {
+  name: string,
+  email: string,
+  id: 1,
+  tags: number[]
+}
+
+export interface IResponseTag {
+  id: number,
+  name: string,
+  description: string,
+  color: string
+}
