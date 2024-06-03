@@ -13,7 +13,7 @@ export default [
     path: "/user",
     method: "POST",
     schema: z.object({
-      name: z.string().optional(),
+      name: z.string(),
       email: z.string().email(),
       password: z.string().optional()
     })
