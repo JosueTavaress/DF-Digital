@@ -76,11 +76,27 @@ const getTags = async (): Promise<IResponseTag[]> => {
   return response.data;
 }
 
+const createTag = async (tag: Omit<IResponseTag, "id">): Promise<IResponseTag> => {
+  const token = getToken();
+  const response = await request({
+    headers: { Authorization: `Bearer ${token}` },
+    method: "POST",
+    url: "/tag",
+    data: {
+      name: tag.name,
+      description: tag.description,
+      color: tag.color
+    }
+  });
+  return response.data;
+}
+
 export default {
   getUsers,
   login,
   createUser,
   getTags,
   updateUser,
-  deleteUser
+  deleteUser,
+  createTag
 }
