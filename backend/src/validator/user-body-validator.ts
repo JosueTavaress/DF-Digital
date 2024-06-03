@@ -11,6 +11,15 @@ export default [
   },
   {
     path: "/user",
+    method: "POST",
+    schema: z.object({
+      name: z.string().optional(),
+      email: z.string().email(),
+      password: z.string().optional()
+    })
+  },
+  {
+    path: "/user",
     method: "PUT",
     schema: z.object({
       name: z.string(),
