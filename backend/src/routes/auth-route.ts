@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { login } from '../controllers/auth-controller';
 import bodyValidator from '../middlewares/body-validator';
-
+import rescue from '../libs/rescue';
 export const authRouter = Router();
 
 /**
@@ -69,5 +69,5 @@ export const authRouter = Router();
  *                     type: string
  *                     example: Required
  */
-authRouter.post('/', [bodyValidator, login]);
+authRouter.post('/', [bodyValidator, rescue(login)]);
 
