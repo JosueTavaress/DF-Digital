@@ -34,6 +34,8 @@ import {
   WrapItem,
 } from '@chakra-ui/react';
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
+import { getToken } from '../utils/storage-browser';
+import { useNavigate } from 'react-router-dom';
 
 interface ITagCategory {
   id: number;
@@ -47,6 +49,7 @@ type ExtendedResponseUser = IResponseUser & {
 };
 
 const Home: React.FC = () => {
+  const navigator = useNavigate();
   const [filteredUsers, setFilteredUsers] = useState<IResponseUser[]>([]);
   const [user, setUser] = useState<IResponseUser[]>([]);
   const [search, setSearch] = useState("");
@@ -62,6 +65,10 @@ const Home: React.FC = () => {
   const [password, setPassword] = useState("");
 
   useEffect(() => {
+    const token = getToken(); // (wip) validate temp expire
+    if (!token) {
+      navigator("/login");
+    }
     const requestUsers = async () => {
       const response = await api.getUsers();
       setUser(response);
