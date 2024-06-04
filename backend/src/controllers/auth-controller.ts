@@ -1,14 +1,17 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { validateLogin, generateToken } from '../services/auth-service';
-import { ErrorService } from '../services/interface';
+import { InternalServerError, UnauthorizedError } from '../errors/errors-http';
 
-const login = async (req: Request, res: Response) => {
+const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const userId = await validateLogin(req.body.email, req.body.password);
-    const data = generateToken("login", { id: userId });
-    res.status(200).json(data);
-  } catch (err: ErrorService & any) {
-    res.status(err.code).json({ message: err.message });
+    const { isValidRequest, statusCode, data, message } = await validateLogin(req.body.email, req.body.password);
+    if (!isValidRequest) {
+      next(new UnauthorizedError(message!))
+    }
+    const result = generateToken("login", { id: data! });
+    res.status(statusCode).json(result);
+  } catch (_error) {
+    next(new InternalServerError());
   }
 }
 

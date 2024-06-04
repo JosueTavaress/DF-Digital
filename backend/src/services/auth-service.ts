@@ -2,23 +2,30 @@ import modelUser from '../models/user-model/user-model';
 import { compare } from './utils/hash';
 import jwt from 'jsonwebtoken';
 import ms from 'ms';
+import { HTTP_CODE } from '../errors/errors-http';
+import { IObjectResponse } from './utils/error-object';
 
-const validateLogin = async (email: string, password: string): Promise<number> => {
+const validateLogin = async (email: string, password: string): Promise<IObjectResponse<number>> => {
   const user = await modelUser.getUserByEmail(email);
   const passwordCrypt = user ? user.password : 'denied';
-  const error = {
+  const objectResponseErr = {
     message: "Password or Email incorrect",
-    code: 401
+    statusCode: HTTP_CODE.HTTP_UNAUTHORIZED,
+    isValidRequest: false,
   }
   if (!user) {
-    throw error;
+    return objectResponseErr;
   }
   const validPassword = await compare(password, passwordCrypt)
   if (!validPassword) {
-    throw error;
+    return objectResponseErr;
   }
-  const { id } = user;
-  return id;
+  const objectResponse = {
+    data: user.id,
+    statusCode: HTTP_CODE.HTTP_OK,
+    isValidRequest: true,
+  };
+  return objectResponse;
 }
 
 const generateToken = (scope: string, data: { id: number }, expiresIn = '1d'): { tempToken: string, expiresAt: Date } => {
