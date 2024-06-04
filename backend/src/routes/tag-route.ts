@@ -53,4 +53,4 @@ export const tagRouter = Router();
  */
 tagRouter.get('/', [validateAuthorization, getTags]);
 
-tagRouter.post('/', [validateAuthorization, bodyValidator, createTag]); ///
+tagRouter.post('/', [validateAuthorization, bodyValidator, createTag]);
