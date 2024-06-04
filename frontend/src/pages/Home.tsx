@@ -48,6 +48,7 @@ type ExtendedResponseUser = IResponseUser & {
 
 const Home: React.FC = () => {
   const [filteredUsers, setFilteredUsers] = useState<IResponseUser[]>([]);
+  const [user, setUser] = useState<IResponseUser[]>([]);
   const [search, setSearch] = useState("");
   const { isOpen: isOpenCreate, onOpen: onOpenCreate, onClose: onCloseCreate } = useDisclosure();
   const { isOpen: isOpenEdit, onOpen: onOpenEdit, onClose: onCloseEdit } = useDisclosure();
@@ -63,6 +64,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const requestUsers = async () => {
       const response = await api.getUsers();
+      setUser(response);
       setFilteredUsers(response);
     };
 
@@ -78,7 +80,7 @@ const Home: React.FC = () => {
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
     if (e.target.value === "") {
-      setFilteredUsers(filteredUsers);
+      setFilteredUsers(user);
     } else {
       setFilteredUsers(filteredUsers.filter(user =>
         user.name.toLowerCase().includes(e.target.value.toLowerCase())
