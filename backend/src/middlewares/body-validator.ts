@@ -1,9 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import schemas from '../validator/index';
-
-const statusCode = {
-  invalid_type: 400
-}
+import { HTTP_CODE } from '../errors/errors-http';
 
 const bodyValidator = (req: Request, res: Response, next: NextFunction) => {
   const data = req.body;
@@ -11,7 +8,7 @@ const bodyValidator = (req: Request, res: Response, next: NextFunction) => {
   const validator = configSchema?.schema.safeParse(data); // dependency zod
   if (validator?.success) return next();
   const errorResponse = validator?.error.errors;
-  res.status(statusCode.invalid_type).send(errorResponse);
+  res.status(HTTP_CODE.HTTP_BAD_REQUEST).send(errorResponse);
 }
 
 export default bodyValidator;
