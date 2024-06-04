@@ -3,6 +3,7 @@ import { getAllUsers, createUser, updateUser, deleteUser } from '../controllers/
 import { validateAuthorization } from '../middlewares/authorization';
 import bodyValidator from '../middlewares/body-validator';
 export const routerUser = Router();
+import rescue from '../libs/rescue';
 /**
  * @openapi
  * '/user':
@@ -35,7 +36,7 @@ export const routerUser = Router();
  *                   type: string
  *                   example: Bearer token is required
  */
-routerUser.get('/', [validateAuthorization, getAllUsers]);
+routerUser.get('/', [validateAuthorization, rescue(getAllUsers)]);
 
 /**
  * @openapi
@@ -109,7 +110,7 @@ routerUser.get('/', [validateAuthorization, getAllUsers]);
  *                     type: string
  *                     example: Required
  */
-routerUser.post('/', [bodyValidator, createUser]);
+routerUser.post('/', [bodyValidator, rescue(createUser)]);
 
 /**
  * @openapi
@@ -222,6 +223,6 @@ routerUser.post('/', [bodyValidator, createUser]);
  *                     type: string
  *                     example: Invalid input
  */
-routerUser.put('/:id', [validateAuthorization, bodyValidator, updateUser]);
+routerUser.put('/:id', [validateAuthorization, bodyValidator, rescue(updateUser)]);
 
-routerUser.delete('/:id', [validateAuthorization, deleteUser]);
+routerUser.delete('/:id', [validateAuthorization, rescue(deleteUser)]);

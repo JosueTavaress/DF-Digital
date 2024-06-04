@@ -1,45 +1,26 @@
 import { Response, Request, NextFunction } from 'express';
 import { getAll, create, update, deleteUser as modeDeleteUser } from '../services/user-service';
-import { ApiError, InternalServerError } from '../errors/errors-http';
+import { HTTP_CODE } from '../errors/errors-http';
 
-const getAllUsers = async (_req: Request, res: Response, next: NextFunction) => {
-  try {
-    const response = await getAll();
-    return res.status(response.statusCode).json(response.data);
-  } catch (_error) {
-    next(new InternalServerError());
-  }
+const getAllUsers = async (_req: Request, res: Response) => {
+  const response = await getAll();
+  return res.status(HTTP_CODE.HTTP_OK).json(response);
 };
 
-const createUser = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { isValidRequest, message, statusCode, data } = await create(req.body);
-    if (!isValidRequest) {
-      next(new ApiError(message!, statusCode))
-    }
-    return res.status(statusCode).json({ id: data, ...req.body });
-  } catch (_error) {
-    next(new InternalServerError());
-  }
+const createUser = async (req: Request, res: Response) => {
+  const userId = await create(req.body);
+  return res.status(HTTP_CODE.HTTP_CREATED).json({ id: userId, ...req.body });
 }
 
-const updateUser = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { data, statusCode } = await update(Number(req.params.id), req.body);
-    res.status(statusCode).json(data);
-  } catch (_error) {
-    next(new InternalServerError());
-  }
+const updateUser = async (req: Request, res: Response) => {
+  const data = await update(Number(req.params.id), req.body);
+  res.status(HTTP_CODE.HTTP_OK).json(data);
 }
 
-const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const id = Number(req.params.id);
-    await modeDeleteUser(id);
-    res.status(200).json({ message: "user deleted" })
-  } catch (_error) {
-    next(new InternalServerError());
-  }
+const deleteUser = async (req: Request, res: Response) => {
+  const id = Number(req.params.id);
+  await modeDeleteUser(id);
+  res.status(HTTP_CODE.HTTP_OK).json({ message: "user deleted" });
 }
 
 export {
