@@ -6,8 +6,8 @@ export declare type ErrorConstructor = { new(...args: any[]): Error }
 
 export declare interface Rescue<T, R> {
   (callback: Callback<T, R>): R
-  from (constructor: ErrorConstructor, callback: Callback<T, R>): R
-  all (callbacks: Callback<T, R>[]): R[]
+  from(constructor: ErrorConstructor, callback: Callback<T, R>): R
+  all(callbacks: Callback<T, R>[]): R[]
 }
 
 const rescue: Rescue<any, any> = function rescue(callback) {
@@ -26,8 +26,8 @@ const rescue: Rescue<any, any> = function rescue(callback) {
   };
 };
 
-rescue.from = function rescuefrom (constructor, callback) {
-  return function errorhandler (err: Error, req: Request, res: Response, next: NextFunction) {
+rescue.from = function rescuefrom(constructor, callback) {
+  return function errorhandler(err: Error, req: Request, res: Response, next: NextFunction) {
     if (!(err instanceof constructor)) {
       next(err)
       return
@@ -37,7 +37,7 @@ rescue.from = function rescuefrom (constructor, callback) {
   }
 }
 
-rescue.all = function rescueall (callbacks) {
+rescue.all = function rescueall(callbacks) {
   return callbacks.map(rescue)
 }
 
