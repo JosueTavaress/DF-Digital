@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { getTags, createTag } from '../controllers/tag-controller';
 import { validateAuthorization } from '../middlewares/authorization';
 import bodyValidator from '../middlewares/body-validator';
+import rescue from '../libs/rescue';
 
 export const tagRouter = Router();
 
@@ -51,6 +52,6 @@ export const tagRouter = Router();
  *                   type: string
  *                   example: Bearer token is required
  */
-tagRouter.get('/', [validateAuthorization, getTags]);
+tagRouter.get('/', [validateAuthorization, rescue(getTags)]);
 
-tagRouter.post('/', [validateAuthorization, bodyValidator, createTag]);
+tagRouter.post('/', [validateAuthorization, bodyValidator, rescue(createTag)]);
