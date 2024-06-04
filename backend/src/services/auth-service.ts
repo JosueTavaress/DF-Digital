@@ -2,7 +2,7 @@ import modelUser from '../models/user-model/user-model';
 import { compare } from './utils/hash';
 import jwt from 'jsonwebtoken';
 import ms from 'ms';
-import { UnauthorizedError } from '../errors/errors-http';
+import { HTTP_CODE, UnauthorizedError } from '../errors/errors-http';
 
 const validateLogin = async (email: string, password: string): Promise<number> => {
   const user = await modelUser.getUserByEmail(email);
@@ -37,10 +37,14 @@ const decodeJwt = (token: string) => {
 
 const validateToken = (scope: string, token: string): number => {
   const jwtPass = process.env.JWT_SECRET;
-  jwt.verify(token, jwtPass!);
+  try {
+    jwt.verify(token, jwtPass!);
+  } catch (error) {
+    throw new UnauthorizedError("invalid token or token expire")
+  }
   const decode = decodeJwt(token) as { scope: string; data: { id: number } };
   if (decode.scope !== scope) {
-    throw Error;
+    throw new UnauthorizedError("you do not have permission to access this route", HTTP_CODE.HTTP_FORBIDDEN);
   };
   const { data: { id } } = decode;
   return id;

@@ -1,17 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 import { validateToken } from '../services/auth-service';
+import { UnauthorizedError } from '../errors/errors-http';
 
-const validateAuthorization = (req: Request, res: Response, next: NextFunction) => {
+const validateAuthorization = (req: Request, _res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
   const tempToken = authorization?.substring(7);
   if (!tempToken) {
-    return res.status(401).json({ message: "Bearer token is required" });
+    throw new UnauthorizedError("Bearer token is required")
   }
-  try {
-    validateToken("login", tempToken);
-  } catch (error) {
-    return res.status(401).json({ message: "invalid token" });
-  }
+  validateToken("login", tempToken);
   next();
 }
 
