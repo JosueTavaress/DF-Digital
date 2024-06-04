@@ -134,10 +134,10 @@ const Home: React.FC = () => {
     const newUser = await api.createUser({ name, email, password });
     const data = [...filteredUsers, { name, id: newUser.id, email, tags: [] }] as IResponseUser[]
     setFilteredUsers(data);
+    onCloseCreate();
   };
 
   const handleEditUser = async (updatedUser: IResponseUser) => {
-    console.log(updatedUser);
     await api.updateUser(updatedUser.id, {
       name: updatedUser.name,
       email: updatedUser.email,
