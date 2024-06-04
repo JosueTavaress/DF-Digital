@@ -21,6 +21,14 @@ export class ApiError extends Error {
   }
 }
 
+export class ConflictRequestError extends ApiError {
+  public readonly statusCode: number
+  constructor(message: string, statusCode = HTTP_CODE.HTTP_CONFLICT) {
+    super(message, statusCode)
+    this.statusCode = statusCode;
+  }
+}
+
 export class BadRequestError extends ApiError {
   constructor(message: string, statusCode = HTTP_CODE.HTTP_BAD_REQUEST) {
     super(message, statusCode)
