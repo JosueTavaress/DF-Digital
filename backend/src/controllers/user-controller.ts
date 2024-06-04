@@ -13,11 +13,11 @@ const getAllUsers = async (_req: Request, res: Response, next: NextFunction) => 
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const data = await create(req.body);
-    if (!data.isValidRequest) {
-      next(new ApiError(data.message!, data.statusCode))
+    const { isValidRequest, message, statusCode, data } = await create(req.body);
+    if (!isValidRequest) {
+      next(new ApiError(message!, statusCode))
     }
-    return res.status(data.statusCode).json({ id: data, ...req.body });
+    return res.status(statusCode).json({ id: data, ...req.body });
   } catch (_error) {
     next(new InternalServerError());
   }
