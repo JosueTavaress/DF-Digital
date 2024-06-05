@@ -95,7 +95,7 @@ ligh mode
 <details open>
 <summary>Login dark mode</summary>
 <br>
-Well, you asked for it!
+dark mode
 <br><br>
 <img src="./frontend/src/assets/image-login-dark.png"></img>
 </details>
