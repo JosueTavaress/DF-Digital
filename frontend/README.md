@@ -1,17 +1,43 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+> Para rodar a aplicação é recomendado que seja executado dentro dos containers do docker siga as instruçõe clicando [aqui](/README.md)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Instruções para Execução Local
+Para executar esta aplicação localmente em sua máquina, siga os passos abaixo:
 
-## Expanding the ESLint configuration
+## Pré-requisitos
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Node.js instalado na máquina (versão 20.11)
+- MySQL instalado e rodando
 
-- Configure the top-level `parserOptions` property like this:
+## Configuração do Banco de Dados
+
+A aplicação no frontend requer um banco de dados MySQL em execução com um esquema específico. Utilizar o dump de construção de banco encontrado em `/backend/sql/dbcreation.sql`.
+
+## Instalação das Dependências
+
+1. Abra um terminal.
+2. Navegue até o diretório `/frontend`.
+3. Execute o seguinte comando para instalar as dependências do projeto:
+
+```sh
+npm install
+```
+
+## Execução da Aplicação
+Após instalar as dependências, você pode iniciar a aplicação com o seguinte comando:
+
+
+```sh
+npm run dev
+```
+
+## Configuração ESLint
+
+Se você estiver desenvolvendo uma aplicação de produção, recomendamos atualizar a configuração para habilitar regras de lint com conhecimento de tipo:
+
+- Configure a propriedade `parserOptions` no nível superior assim:
 
 ```js
 export default {
@@ -25,6 +51,6 @@ export default {
 }
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+
+
