@@ -1,5 +1,8 @@
-# React + TypeScript + Vite
-
+## Tecnologias utilizadas
+- React
+- TypeScript
+- Vite
+- chackra/ui
 
 > Para rodar a aplicação é recomendado que seja executado dentro dos containers do docker siga as instruçõe clicando [aqui](/README.md)
 
