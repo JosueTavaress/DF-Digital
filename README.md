@@ -16,6 +16,7 @@
 ## Pré-requisitos
 
 - **Docker:** Necessário para construir e iniciar os containers.
+- **.env:** Configurar env como no .env.example.
 
 ### Passos para Inicialização
 1. Execute o comando `docker-compose up` para construir e iniciar os containers.
