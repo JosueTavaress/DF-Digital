@@ -82,45 +82,129 @@
 # Interface
 
 ## Login
+<details open>
+<summary>Login light mode</summary>
+<br>
+ligh mode
+<br><br>
+<img src="./frontend/src/assets/image-login-light.png"></img>
+</details>
 
-### ligh mode
+---
 
-![page login ligh mode](/frontend/src/assets/image-login-light.png)
+<details>
+<summary>Login dark mode</summary>
+<br>
+Well, you asked for it!
+<br><br>
+<img src="./frontend/src/assets/image-login-dark.png"></img>
+</details>
 
-### dark mode
-
-![page login ligh mode](/frontend/src/assets/image-login-dark.png)
+---
 
 ## Registrar
-### ligh mode
-![registar novo usuario](/frontend/src/assets/register-light.png)
 
-### dark mode
-![alt](/frontend/src/assets/register-dark.png)
+---
+<details>
+<summary>Registrar light mode</summary>
+<br>
+ligh mode
+<br><br>
+<img src="./frontend/src/assets/register-light.png"></img>
+</details>
+
+---
+
+<details>
+<summary>Registrar dark mode</summary>
+<br>
+dark mode
+<br><br>
+<img src="./frontend/src/assets/register-dark.png"></img>
+</details>
+
+---
 
 ## Gerenciamento
 
-### dark mode
-![alt](/frontend/src/assets/image-g-dark.png)
+---
 
-### light mode
-![alt](/frontend/src/assets/image-g-light.png)
+<details>
+<summary>Gerenciamento de Tags dark mode</summary>
+<br>
+dark mode
+<br><br>
+<img src="./frontend/src/assets/image-g-dark.png"></img>
+</details>
 
-### light mode
-![alt](/frontend/src/assets/image-new-user-light.png)
+---
+<details open>
+<summary>Gerenciamento de Tag light mode</summary>
+<br>
+light mode
+<br><br>
+<img src="./frontend/src/assets/image-g-light.png"></img>
+</details>
 
-### dark mode
-![alt](/frontend/src/assets/image-new-user-dark.png)
+---
 
-### dark mode
-![alt](/frontend/src/assets/edit-user-dark.png)
+<details>
+<summary>Gerenciamento de novo usuário light mode</summary>
+<br>
+light mode
+<br><br>
+<img src="./frontend/src/assets/image-new-user-light.png"></img>
+</details>
 
-### light mode
+---
 
-![alt](/frontend/src/assets/edit-user-light.png)
+<details>
+<summary>Gerenciamento de novo usuário dark mode</summary>
+<br>
+dark mode
+<br><br>
+<img src="./frontend/src/assets/image-new-user-dark.png"></img>
+</details>
 
-### dark mode
-![alt](/frontend/src/assets/image-tag-dark.png)
+---
 
-### light mode
-![alt text](/frontend/src/assets/image-tag-light.png)
+<details>
+<summary>Edição de usuário dark mode</summary>
+<br>
+dark mode
+<br><br>
+<img src="./frontend/src/assets/edit-user-dark.png"></img>
+</details>
+
+---
+
+
+<details>
+<summary>Edição de usuário light mode</summary>
+<br>
+light mode
+<br><br>
+<img src="./frontend/src/assets/edit-user-light.png"></img>
+</details>
+
+---
+
+<details>
+<summary>Criação de nova tag dark mode</summary>
+<br>
+dark mode
+<br><br>
+<img src="./frontend/src/assets/image-tag-dark.png"></img>
+</details>
+
+---
+
+<details>
+<summary>Criação de nova tag light mode</summary>
+<br>
+light mode
+<br><br>
+<img src="./frontend/src/assets/image-tag-light.png"></img>
+</details>
+
+---
