@@ -82,7 +82,7 @@
 # Interface
 
 ## Login
-<details open>
+<details>
 <summary>Login light mode</summary>
 <br>
 ligh mode
@@ -92,7 +92,7 @@ ligh mode
 
 ---
 
-<details>
+<details open>
 <summary>Login dark mode</summary>
 <br>
 Well, you asked for it!
@@ -129,7 +129,7 @@ dark mode
 
 ---
 
-<details>
+<details open>
 <summary>Gerenciamento de Tags dark mode</summary>
 <br>
 dark mode
@@ -138,7 +138,7 @@ dark mode
 </details>
 
 ---
-<details open>
+<details>
 <summary>Gerenciamento de Tag light mode</summary>
 <br>
 light mode
