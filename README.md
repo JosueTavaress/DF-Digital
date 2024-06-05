@@ -129,7 +129,7 @@ dark mode
 
 ---
 
-<details open>
+<details>
 <summary>Gerenciamento de Tags dark mode</summary>
 <br>
 dark mode
@@ -138,7 +138,7 @@ dark mode
 </details>
 
 ---
-<details>
+<details open>
 <summary>Gerenciamento de Tag light mode</summary>
 <br>
 light mode
