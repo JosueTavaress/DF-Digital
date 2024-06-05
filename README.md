@@ -118,3 +118,9 @@
 ### light mode
 
 ![alt](/frontend/src/assets/edit-user-light.png)
+
+### dark mode
+![alt](/frontend/src/assets/image-tag-dark.png)
+
+### light mode
+![alt text](/frontend/src/assets/image-tag-light.png)
